@@ -1,0 +1,16 @@
+Methodennamen mit @RunMe: 
+toString
+method0
+method1
+method2
+method3
+method4
+
+„Nicht-invokierbare“ Methoden mit @RunMe: 
+method4 null
+
+Methodennamen ohne @RunMe: 
+noRmR1
+noRmR2
+noRmR3
+

@@ -1,0 +1,12 @@
+Methodennamen mit @RunMe: 
+bugFix
+
+„Nicht-invokierbare“ Methoden mit @RunMe: 
+testBx java.lang.RuntimeException: This test always passed
+testB java.lang.RuntimeException: This test always passed
+
+Methodennamen ohne @RunMe: 
+testsB
+testA
+testK
+
