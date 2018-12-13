@@ -13,8 +13,8 @@ public class DependencyBinder extends AbstractBinder {
 
     @Override
     protected void configure() {
-//        bind(InMemorySongsPersistence.class).to(ISongPersistence.class).in(Singleton.class);
 
+        bind(InMemorySongsPersistence.class).to(ISongPersistence.class).in(Singleton.class);
         bind(TokenCreator.class).to(ITokenCreator.class).in(Singleton.class);
 
     }

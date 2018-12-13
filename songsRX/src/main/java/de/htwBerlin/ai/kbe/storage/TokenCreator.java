@@ -30,6 +30,7 @@ public class TokenCreator implements ITokenCreator{
         LOG.info("Constructing Token Generator");
 
         tokenList = new ArrayList<>();
+        tokenList.add("toktok");
     }
 
     public synchronized static TokenCreator getInstance() {
@@ -85,9 +86,9 @@ public class TokenCreator implements ITokenCreator{
             byte[] hash = md.digest((userId + UUID.randomUUID().toString()).getBytes(StandardCharsets.UTF_8));
 
             token = Base64.getEncoder().encodeToString(hash);
+            tokenList.add("toktok");//for test purposes
 
             tokenList.add(token);
-
             return token;
 
         } catch (NoSuchAlgorithmException e) {

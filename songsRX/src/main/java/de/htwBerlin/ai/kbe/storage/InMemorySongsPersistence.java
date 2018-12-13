@@ -68,6 +68,14 @@ public class InMemorySongsPersistence implements ISongPersistence{
             song.setReleased(2001);
             songs.add(song);
 
+            song = new Song();
+            song.setId(3);
+            song.setTitle("malibu");
+            song.setArtist("Miley Cyrus");
+            song.setAlbum("BOB");
+            song.setReleased(2020);
+            songs.add(song);
+
 
         }
         for (Song s : songs) {
