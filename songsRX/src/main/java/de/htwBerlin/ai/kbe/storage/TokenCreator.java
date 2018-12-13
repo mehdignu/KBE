@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.htwBerlin.ai.kbe.pojo.Contact;
 import org.apache.log4j.Logger;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +19,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TokenCreator {
+public class TokenCreator implements ITokenCreator{
 
     private static TokenCreator singleInstance = null;
     private static String token = null;
@@ -41,6 +44,7 @@ public class TokenCreator {
      * @param userID
      * @return
      */
+    @Override
     public boolean authenticate(String userID) {
         List<Contact> contactsList = new ArrayList<>();
         try {
@@ -98,6 +102,7 @@ public class TokenCreator {
      * @return
      * @throws IOException
      */
+    @Override
     public boolean checkAuth(String auth) throws IOException {
 
         if (auth != null && !auth.equals("")) {
@@ -112,6 +117,7 @@ public class TokenCreator {
         tokenList.add(token);
     }
 
+    @Override
     public List<String> getTokenList() {
         return tokenList;
     }

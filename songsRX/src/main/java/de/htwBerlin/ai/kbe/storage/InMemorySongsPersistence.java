@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import de.htwBerlin.ai.kbe.pojo.Song;
 
-public class InMemorySongsPersistence {
+public class InMemorySongsPersistence implements ISongPersistence{
 
     private static Map<Integer, Song> songsStorage;
     private static InMemorySongsPersistence singleInstance = null;
@@ -51,7 +51,24 @@ public class InMemorySongsPersistence {
             }
 
         } catch (IOException e) {
-            LOG.debug("Songs Init error");
+
+            Song song = new Song();
+            song.setId(1);
+            song.setArtist("Sinatra");
+            song.setAlbum("rock it baby");
+            song.setReleased(1999);
+            song.setTitle("WHY NOT");
+            songs.add(song);
+
+            song = new Song();
+            song.setId(2);
+            song.setTitle("woohoo");
+            song.setArtist("boohoo");
+            song.setAlbum("hi there");
+            song.setReleased(2001);
+            songs.add(song);
+
+
         }
         for (Song s : songs) {
             songsStorage.put(s.getId(), s);
@@ -65,6 +82,7 @@ public class InMemorySongsPersistence {
      *
      * @return
      */
+    @Override
     public Collection<Song> getAllSongs() {
         return songsStorage.values();
     }
@@ -75,6 +93,7 @@ public class InMemorySongsPersistence {
      * @param id id of the wanted song
      * @return
      */
+    @Override
     public Song getSongByID(Integer id) {
         return songsStorage.get(id);
     }
@@ -86,6 +105,7 @@ public class InMemorySongsPersistence {
      * @param song
      * @return
      */
+    @Override
     public Integer addSong(Song song) {
         LOG.info("song added with id " + song.getId());
         songsStorage.put(song.getId(), song);
@@ -99,6 +119,7 @@ public class InMemorySongsPersistence {
      * @param song
      * @return
      */
+    @Override
     public boolean updateSong(Song song) {
 
         //in the case of the song doesn't exists
@@ -112,6 +133,7 @@ public class InMemorySongsPersistence {
     }
 
     // returns deleted song
+    @Override
     public Song deleteSong(Integer id) {
 
         if (!songExists(id))

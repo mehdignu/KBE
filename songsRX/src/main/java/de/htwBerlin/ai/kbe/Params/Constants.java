@@ -5,5 +5,6 @@ public final class Constants {
 
     public static final String FAIL_MESSAGE = "User is not authenticated";
     public static final String AUTH_HEADER = "authorization";
+    public static final String ROOT_RESOURCE_PATH = "/rest";
 
 }

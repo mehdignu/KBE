@@ -1,12 +1,16 @@
 package de.htwBerlin.ai.kbe.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import de.htwBerlin.ai.kbe.pojo.Song;
+import de.htwBerlin.ai.kbe.storage.ITokenCreator;
 import de.htwBerlin.ai.kbe.storage.InMemorySongsPersistence;
 import de.htwBerlin.ai.kbe.storage.TokenCreator;
 import java.io.IOException;
+import java.util.List;
 import javax.ws.rs.core.Response.Status;
 import de.htwBerlin.ai.kbe.Params.Constants;
 import org.apache.log4j.Logger;
@@ -17,6 +21,7 @@ public class Songs {
 
     @Context
     UriInfo uriInfo;
+
 
     private static TokenCreator tokenManager = TokenCreator.getInstance();
     private static final Logger LOG = Logger.getLogger(InMemorySongsPersistence.class);
@@ -32,7 +37,6 @@ public class Songs {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response getAllSongs(@HeaderParam(Constants.AUTH_HEADER) String auth) throws IOException {
 
-
         //check user authentication
         if (!tokenManager.checkAuth(auth))
             return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.FAIL_MESSAGE).build();
@@ -43,8 +47,14 @@ public class Songs {
         //get all the saved songs
         songs = InMemorySongsPersistence.getInstance().getAllSongs();
 
+        List list;
+        if (songs instanceof List)
+            list = (List)songs;
+        else
+            list = new ArrayList(songs);
+
         //send them back
-        return Response.ok(songs).build();
+        return Response.ok(list).build();
     }
 
     /**
@@ -60,7 +70,6 @@ public class Songs {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response getSongs(@PathParam("id") Integer id,
                              @HeaderParam(Constants.AUTH_HEADER) String auth) {
-
 
         //check user authentication
         try {
