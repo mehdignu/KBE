@@ -19,17 +19,6 @@ public class SongsRequestsTest extends JerseyTest {
     }
 
 
-    @Test
-    public void updateSongWithExistingIdShouldReturn204 () {
-        Song mySong = new Song();
-        mySong.setId(30);
-        mySong.setArtist("boo");
-        mySong.setTitle("boo");
-        mySong.setAlbum("boo");
-        mySong.setReleased(2015);
-        Response response = target("/songs/10").request().header("Authorization", "toktok").put(Entity.xml(mySong));
-        Assert.assertEquals(204, response.getStatus());
-    }
 
     @Test
     public void UpdateSongWithFalseIDShouldReturn204() {
